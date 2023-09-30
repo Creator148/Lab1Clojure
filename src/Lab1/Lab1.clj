@@ -1,14 +1,17 @@
 (ns Lab1.Lab1)
 
 (defn repeated [coll n]
-  (loop [seen {}
-         xs (seq coll)
-         result []]
-    (if-let [[y & ys] xs]
-      (let [current-count (get seen y 0)]
-        (recur (update seen y (fn [x] (if x (inc x) 1))) ys
-               (if (>= current-count n) (conj result y) result)))
-      result)))
+  (lazy-seq
+    (loop [seen {}
+           xs coll
+           result-seq []]
+      (if-let [[y & ys] (seq xs)]
+        (recur (update seen y (fnil inc 0))
+               ys
+               (if (= (get seen y) n)
+                 (cons y result-seq)
+                 result-seq))
+        result-seq))))
 
 (defn main []
   (println "Введите элементы списка (через пробел), затем n:")
