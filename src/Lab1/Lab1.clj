@@ -1,4 +1,4 @@
-(ns Lab1.core)
+(ns Lab1.Lab1)
 
 (defn repeated [coll n]
   (loop [seen {}

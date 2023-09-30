@@ -1,4 +1,4 @@
-(ns Lab2.lab2 (:require [clojure.core.async :as a]))
+(ns Lab2.Lab2 (:require [clojure.core.async :as a]))
 
 (def chan1 (a/chan 10))
 (a/onto-chan! chan1 [5 4 8 12 9 -2 8 3 1 0])
