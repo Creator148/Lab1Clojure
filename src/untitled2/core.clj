@@ -1,17 +1,21 @@
 (ns untitled2.core)
 
-(defn filter-and-print-elements-more-than-n-times [lst n]
-  (let [element-counts (frequencies lst)]
-    (doseq [[element count] element-counts
-            :when (> count n)]
-      (print element " "))))
-
+(defn repeated [coll n]
+  ((fn ff [seen xs]
+     (lazy-seq
+       (when-let [[y & ys] (seq xs)]
+         (case (seen y)
+           :several (ff seen ys)
+           :once (if (>= n 2)
+                   (cons y (ff (assoc seen y :several) ys))
+                   (ff seen ys))
+           (ff (assoc seen y :once) ys)))))
+   {} coll))
 (defn main []
   (println "Введите элементы списка (через пробел), затем n:")
   (let [input (read-line)
         parsed-input (clojure.string/split input #"\s+")
         n (-> (read-line) Integer.)]
-    (filter-and-print-elements-more-than-n-times parsed-input n)))
-
+    (prn (repeated parsed-input n) )))
 (main)
 
