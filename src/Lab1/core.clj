@@ -1,4 +1,4 @@
-(ns untitled2.core)
+(ns Lab1.core)
 
 (defn repeated [coll n]
   ((fn ff [seen xs]

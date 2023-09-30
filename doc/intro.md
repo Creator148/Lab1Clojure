@@ -1,3 +1,3 @@
-# Introduction to untitled2
+# Introduction to Lab1
 
 TODO: write [great documentation](http://jacobian.org/writing/what-to-write/)
